@@ -32,11 +32,11 @@ contract('SupplyChain', accounts => {
         const result = await supplyChain.getItem.call(itemId)
         const contractBalanceAfter = await web3.eth.getBalance(supplyChain.address)
 
-        assert.equal(result[1], name, "The name of the last added item does not match the expected value.")
-        assert.equal(result[2].toString(10), price, "The price of the last added item does not match the expected value.")
-        assert.equal(result[3].toString(10), 0, "The state of the item should be 'ForSale', which should be declared first in the State enum.")
-        assert.equal(result[4], alice, "The address adding the item should be listed as the seller.")
-        assert.equal(result[5], emptyAddress, "The buyer address should be set to 0 when an item is added.")
+        assert.equal(result[0], name, "The name of the last added item does not match the expected value.")
+        assert.equal(result[1].toString(10), price, "The price of the last added item does not match the expected value.")
+        assert.equal(result[2].toString(10), 0, "The state of the item should be 'ForSale', which should be declared first in the State enum.")
+        assert.equal(result[3], alice, "The address adding the item should be listed as the seller.")
+        assert.equal(result[4], emptyAddress, "The buyer address should be set to 0 when an item is added.")
         assert.equal(eventEmitted, true, "Adding an item should emit a For Sale event.")
         assert.equal(new BN(contractBalanceAfter).toString(), new BN(contractBalanceBefore).add(new BN(feeInWei)).toString(), "The contract balance should be increased by the price of the fee (1 finney).")
     })
@@ -56,8 +56,8 @@ contract('SupplyChain', accounts => {
         let bobBalanceAfter = await web3.eth.getBalance(bob)
         const result = await supplyChain.getItem.call(itemId)
 
-        assert.equal(result[3].toString(10), 1, "The state of the item should be 'Sold', which should be declared second in the State enum.")
-        assert.equal(result[5], bob, "The buyer address should be set bob when he purchases an item.")
+        assert.equal(result[2].toString(10), 1, "The state of the item should be 'Sold', which should be declared second in the State enum.")
+        assert.equal(result[4], bob, "The buyer address should be set bob when he purchases an item.")
         assert.equal(eventEmitted, true, "Adding an item should emit a Sold event.")
         assert.equal(new BN(aliceBalanceAfter).toString(), new BN(aliceBalanceBefore).add(new BN(price)).toString(), "Alice's balance should be increased by the price of the item.")
         assert.isBelow(Number(bobBalanceAfter), Number(new BN(bobBalanceBefore).sub(new BN(price))), "Bob's balance should be reduced by more than the price of the item (including gas costs).")
@@ -74,7 +74,7 @@ contract('SupplyChain', accounts => {
         const result = await supplyChain.getItem.call(itemId)
 
         assert.equal(eventEmitted, true, "Adding an item should emit a Shipped event.")
-        assert.equal(result[3].toString(10), 2, "The state of the item should be 'Shipped', which should be declared third in the State enum.")
+        assert.equal(result[2].toString(10), 2, "The state of the item should be 'Shipped', which should be declared third in the State enum.")
     })
 
     it("Should allow the buyer to mark the item as received.", async() => {
@@ -88,7 +88,7 @@ contract('SupplyChain', accounts => {
         const result = await supplyChain.getItem.call(itemId)
 
         assert.equal(eventEmitted, true, "Adding an item should emit a Shipped event.")
-        assert.equal(result[3].toString(10), 3, "The state of the item should be 'Received', which should be declared fourth in the State enum.")
+        assert.equal(result[2].toString(10), 3, "The state of the item should be 'Received', which should be declared fourth in the State enum.")
     })
 
 });
