@@ -1,6 +1,6 @@
 // Implement the smart contract SupplyChain following the provided instructions.
 // Look at the tests in SupplyChain.test.js and run 'truffle test' to be sure that your contract is working properly.
-// Only this file (SupplyChain.sol) can be modified, otherwise your assignment submission may be disqualified.
+// Only this file (SupplyChain.sol) should be modified, otherwise your assignment submission may be disqualified.
 
 pragma solidity ^0.5.0;
 
