@@ -6,7 +6,7 @@ contract SupplyChain {
 
   // Create an enumerated type variable named 'State' to list the possible states of an item (in this order): 'ForSale', 'Sold', 'Shipped' and 'Received'.
 
-  // Create a struct named 'Item' containing the following members (in this order): 'itemId', 'name', 'price', 'state', 'seller' and 'buyer'. 
+  // Create a struct named 'Item' containing the following members (in this order): 'name', 'price', 'state', 'seller' and 'buyer'. 
 
   // Create a variable named 'items' to map itemIds to Items.
 
