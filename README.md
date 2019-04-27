@@ -1,6 +1,6 @@
 # Assignment Description - Supply Chain
 
-The supply-chain directory is a truffle project that contains the required contract, migration and other files.
+The supply-chain repository is a truffle project that contains the required contract, migration and other files.
 
 In this assignment you will have to implement the smart contract SupplyChain following the instructions provided into the file SupplyChain.sol.
 Look at the tests in SupplyChain.test.js and run `truffle test` to be sure that your contract is working properly.
