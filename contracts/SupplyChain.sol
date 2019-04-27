@@ -24,7 +24,7 @@ contract SupplyChain {
 
 
 
-  // Create a function named 'addItem' that allows anyone to add a new Item by paying a fee of 1 finney. All struct members should be mandatory except the buyer.
+  // Create a function named 'addItem' that allows anyone to add a new Item by paying a fee of 1 finney. Any overpayment amount should be returned to the caller. All struct members should be mandatory except the buyer.
 
   // Create a function named 'buyItem' that allows anyone to buy a specific Item by paying its price. The price amount should be transferred to the seller and any overpayment amount should be returned to the buyer.
   
