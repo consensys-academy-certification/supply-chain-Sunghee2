@@ -1,12 +1,14 @@
+// ===== DO NOT MODIFY THIS FILE =====
+
 const BN = web3.utils.BN
 const SupplyChain = artifacts.require('SupplyChain')
 
 contract('SupplyChain', accounts => {
-    const supplyChain
     const owner = accounts[0]
     const alice = accounts[1]
     const bob = accounts[2]
-    
+    const price = '1000'
+    let supplyChain
     let itemId
     
     before("Setup contract", async () => {
@@ -16,7 +18,7 @@ contract('SupplyChain', accounts => {
     it("Should add an item with the provided name and price.", async() => {
         const emptyAddress = '0x0000000000000000000000000000000000000000'
         const name = 'book'
-        const price = '1000'
+        
         const feeInWei = await web3.utils.toWei('1', 'finney')
         let eventEmitted = false
     
@@ -26,7 +28,7 @@ contract('SupplyChain', accounts => {
             value: feeInWei
         })
         if (tx.logs[0].event) {
-            itemId = tx.logs[0].args.itemId.toString(10)
+            itemId = tx.logs[0].args[0].toString(10)
             eventEmitted = true
         } 
         const result = await supplyChain.getItem.call(itemId)
@@ -49,7 +51,7 @@ contract('SupplyChain', accounts => {
         const bobBalanceBefore = await web3.eth.getBalance(bob)
         const tx = await supplyChain.buyItem(itemId, {from: bob, value: amount})
         if (tx.logs[0].event) {
-            itemId = tx.logs[0].args.itemId.toString(10)
+            itemId = tx.logs[0].args[0].toString(10)
             eventEmitted = true
         }
         let aliceBalanceAfter = await web3.eth.getBalance(alice)
@@ -68,7 +70,7 @@ contract('SupplyChain', accounts => {
 
         const tx = await supplyChain.shipItem(itemId, {from: alice})
         if (tx.logs[0].event) {
-            itemId = tx.logs[0].args.itemId.toString(10)
+            itemId = tx.logs[0].args[0].toString(10)
             eventEmitted = true
         }
         const result = await supplyChain.getItem.call(itemId)
@@ -82,7 +84,7 @@ contract('SupplyChain', accounts => {
 
         const tx = await supplyChain.receiveItem(itemId, {from: bob})
         if (tx.logs[0].event) {
-            itemId = tx.logs[0].args.itemId.toString(10)
+            itemId = tx.logs[0].args[0].toString(10)
             eventEmitted = true
         }
         const result = await supplyChain.getItem.call(itemId)
