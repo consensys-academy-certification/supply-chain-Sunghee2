@@ -1,7 +1,6 @@
-module.exports = {
-  // compilers: {
-  //   solc: '0.4.25'
-  // },  
+// ===== DO NOT MODIFY THIS FILE =====
+
+module.exports = { 
   networks: {
     development: {
       host: "localhost",
