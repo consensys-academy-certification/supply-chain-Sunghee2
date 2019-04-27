@@ -10,7 +10,7 @@ contract SupplyChain {
 
   // Create a variable named 'items' to map itemIds to Items.
 
-  // Register events to log all state changes for each item. Name these events exactly the same as the enumerated states.
+  // Create an event to log all state changes for each item.
 
 
 
